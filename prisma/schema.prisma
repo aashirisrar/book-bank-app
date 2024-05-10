@@ -1,0 +1,125 @@
+// schema.prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id       String  @id @unique @default(cuid())
+  name     String? @unique
+  email    String  @unique
+  password String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  firstName      String?
+  lastName       String?
+  bio            String?
+  gender         String?
+  dateOfBirth    DateTime?
+  followingCount Int       @default(0)
+  followerCount  Int       @default(0)
+  profilePicture String?   @default("https://utfs.io/f/3b649a8a-5cfc-481d-ac4b-3fda846ee663-6tiuj6.png")
+  isSociety      Boolean   @default(false)
+
+  active Boolean @default(false)
+
+  posts    Post[]
+  comments Comments[]
+
+  Followers Followers[]
+  Following Following[]
+
+  Session       Session[]
+  Event         Event[]
+  ActivateToken ActivateToken[]
+}
+
+model ActivateToken {
+  id          Int       @id @default(autoincrement())
+  token       String    @unique
+  createdAt   DateTime  @default(now())
+  activatedAt DateTime?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  postId       String   @id @unique @default(cuid())
+  body         String
+  likeCount    Int      @default(0)
+  commentCount Int      @default(0)
+  image        String
+  createdAt    DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  comments Comments[]
+}
+
+model Comments {
+  commentId String   @id @unique @default(cuid())
+  postedAt  DateTime
+  body      String
+  likeCount Int      @default(0)
+
+  userId String
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  postId String
+  Post   Post?  @relation(fields: [postId], references: [postId], onDelete: Cascade)
+}
+
+model Followers {
+  id                 String   @id @unique @default(cuid())
+  startedFollowingAt DateTime @default(now())
+
+  followingId String
+
+  followerId String
+  follower   User   @relation(fields: [followerId], references: [id], onDelete: Cascade)
+}
+
+model Following {
+  id                 String   @id @unique @default(cuid())
+  startedFollowingAt DateTime @default(now())
+
+  followerId String
+
+  followingId String
+  following   User   @relation(fields: [followingId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id        String    @id @unique @default(cuid())
+  name      String?
+  location  String?
+  date      DateTime?
+  startTime DateTime?
+  endTime   DateTime?
+  image     String?
+  details   String?
+  createdAt DateTime  @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
