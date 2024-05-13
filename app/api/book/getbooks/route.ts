@@ -22,6 +22,15 @@ export async function POST(req: Request) {
         // find the books
         const fetchedBooks = await prisma.book.findMany({});
 
+        // add user details to the post who made the post
+        for (let book of fetchedBooks) {
+            const user = await prisma.user.findUnique({
+                where: {
+                    id: book.userId
+                }
+            });
+            book.user = user;
+        }
 
         return NextResponse.json(
             { success: "Books Found!", books: fetchedBooks },

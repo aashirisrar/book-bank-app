@@ -21,20 +21,19 @@ export async function POST(req: Request) {
             }
         })
 
-
-        // create the post
-        const createdBok = await prisma.book.create({
+        // create the book
+        const createdBook = await prisma.book.create({
             data: {
                 title,
                 details,
-                price,
                 image,
+                price: parseInt(price),
                 userId: currentUser?.id!,
             },
         })
 
         return NextResponse.json(
-            { success: "Book Created!", book: createdBok },
+            { success: "Book Created!", book: createdBook },
             { status: 200 }
         );
     } catch (e) {

@@ -31,4 +31,3 @@ export const sendEmail = async (options: { to: string[]; subject: string; text: 
         console.error(error);
     }
 };
-//Format eg. sendEmail({to:['l226797@lhr.nu.edu.pk','ehanayaz@gmail.com'],subject: "Hi",text: "Hello"});

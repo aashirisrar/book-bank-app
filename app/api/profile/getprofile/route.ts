@@ -14,22 +14,8 @@ export async function POST(req: Request) {
             );
         }
 
-        const user = await prisma.user.findUnique({
-            where: {
-                email: session.user?.email!
-            }
-        })
-
-        // update the user's profile
-        const foundUser = await prisma.user.findUnique({
-            where: {
-                email: user?.email!
-            },
-
-        })
-
         return NextResponse.json(
-            { success: "Profile Found!", user: foundUser },
+            { success: "Profile Found!", isLoggedin: true },
             { status: 200 }
         );
     } catch (e) {

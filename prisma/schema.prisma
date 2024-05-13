@@ -58,7 +58,7 @@ model Book {
   details   String
   image     String
   createdAt DateTime @default(now())
-  price     Float?   @default(0)
+  price     Int      @default(0)
   isSold    Boolean  @default(false)
 
   userId String

@@ -100,6 +100,7 @@ export function AddPost() {
                                                 placeholder="e.g The Alchemist"
                                                 className="col-span-3"
                                                 {...field}
+                                                required
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -117,6 +118,7 @@ export function AddPost() {
                                                 placeholder="e.g The Alchemist is a novel"
                                                 className="col-span-3"
                                                 {...field}
+                                                required
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -135,6 +137,7 @@ export function AddPost() {
                                                 type="number"
                                                 className="col-span-3"
                                                 {...field}
+                                                required
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -152,6 +155,7 @@ export function AddPost() {
                                                 className="hidden"
                                                 type="text"
                                                 {...field}
+                                                required
                                             />
                                         </FormControl>
                                         <FormMessage />

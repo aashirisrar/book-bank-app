@@ -33,9 +33,9 @@ export const { auth, handlers, signIn } = NextAuth({
                     return null
                 }
 
-                if (!user.active) {
-                    throw new Error('User is not active')
-                }
+                // if (!user.active) {
+                //     throw new Error('User is not active')
+                // }
 
                 const isPasswordValid = await bcryptjs.compare(
                     credentials.password,
