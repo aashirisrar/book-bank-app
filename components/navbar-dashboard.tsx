@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import {
+    Book,
     CircleUser,
     Menu,
-    Package2,
     Search,
 } from "lucide-react";
 
@@ -66,8 +66,8 @@ const NavbarDashboard = () => {
                             href="/"
                             className="flex items-center gap-2 text-lg font-semibold mb-2"
                         >
-                            <Package2 className="h-6 w-6" />
-                            <span className="sr-only">Connect Inc</span>
+                            <Book className="h-6 w-6" />
+                            <span className="sr-only">Booker Inc</span>
                         </Link>
                         {routes.map((route) => (
                             <Link

@@ -132,6 +132,7 @@ export function AddPost() {
                                         <FormControl>
                                             <Input
                                                 placeholder="e.g. 1000"
+                                                type="number"
                                                 className="col-span-3"
                                                 {...field}
                                             />
@@ -162,7 +163,7 @@ export function AddPost() {
                             </div>
                             <FormSuccess message={success} />
                             <div className="flex justify-end">
-                                <Button type="submit">Create Post</Button>
+                                <Button type="submit">Add Book</Button>
                             </div>
                         </form>
                     </Form>

@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold md:text-2xl">Feed</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Available Books</h1>
         <div className="flex gap-x-3">
           <AddPost />
           {/* // check if user is logged in */}
