@@ -10,8 +10,8 @@ const Posts = () => {
 
     async function fetchFriendsPost() {
         try {
-            const response = await axios.post("/api/post/getfriendsposts");
-            setPosts(response.data.posts);
+            const response = await axios.post("/api/book/getbooks");
+            setPosts(response.data.books);
         } catch (error) {
             console.error("Error fetching user profile:", error);
         }

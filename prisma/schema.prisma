@@ -22,23 +22,13 @@ model User {
   firstName      String?
   lastName       String?
   bio            String?
-  gender         String?
-  dateOfBirth    DateTime?
-  followingCount Int       @default(0)
-  followerCount  Int       @default(0)
-  profilePicture String?   @default("https://utfs.io/f/3b649a8a-5cfc-481d-ac4b-3fda846ee663-6tiuj6.png")
-  isSociety      Boolean   @default(false)
+  profilePicture String? @default("/user.png")
 
   active Boolean @default(false)
 
-  posts    Post[]
-  comments Comments[]
-
-  Followers Followers[]
-  Following Following[]
+  books Book[]
 
   Session       Session[]
-  Event         Event[]
   ActivateToken ActivateToken[]
 }
 
@@ -62,63 +52,14 @@ model Session {
   updatedAt DateTime @updatedAt
 }
 
-model Post {
-  postId       String   @id @unique @default(cuid())
-  body         String
-  likeCount    Int      @default(0)
-  commentCount Int      @default(0)
-  image        String
-  createdAt    DateTime @default(now())
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  comments Comments[]
-}
-
-model Comments {
-  commentId String   @id @unique @default(cuid())
-  postedAt  DateTime
-  body      String
-  likeCount Int      @default(0)
-
-  userId String
-  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  postId String
-  Post   Post?  @relation(fields: [postId], references: [postId], onDelete: Cascade)
-}
-
-model Followers {
-  id                 String   @id @unique @default(cuid())
-  startedFollowingAt DateTime @default(now())
-
-  followingId String
-
-  followerId String
-  follower   User   @relation(fields: [followerId], references: [id], onDelete: Cascade)
-}
-
-model Following {
-  id                 String   @id @unique @default(cuid())
-  startedFollowingAt DateTime @default(now())
-
-  followerId String
-
-  followingId String
-  following   User   @relation(fields: [followingId], references: [id], onDelete: Cascade)
-}
-
-model Event {
-  id        String    @id @unique @default(cuid())
-  name      String?
-  location  String?
-  date      DateTime?
-  startTime DateTime?
-  endTime   DateTime?
-  image     String?
-  details   String?
-  createdAt DateTime  @default(now())
+model Book {
+  bookId    String   @id @unique @default(cuid())
+  title     String
+  details   String
+  image     String
+  createdAt DateTime @default(now())
+  price     Float?   @default(0)
+  isSold    Boolean  @default(false)
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)

@@ -48,7 +48,7 @@ export async function POST(req: Request) {
 
 
         return NextResponse.json(
-            { success: "Posts Found!", posts: fetchedPosts },
+            { success: "Books Found!", books: fetchedPosts },
             { status: 200 }
         );
     } catch (e) {

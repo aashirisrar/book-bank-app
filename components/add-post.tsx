@@ -77,9 +77,9 @@ export function AddPost() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Add New Post</DialogTitle>
+                    <DialogTitle>Add New Book</DialogTitle>
                     <DialogDescription>
-                        Add your content and image to post.
+                        Add your details for book.
                     </DialogDescription>
                 </DialogHeader>
                 <div className="grid py-1">
