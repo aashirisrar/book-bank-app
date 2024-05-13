@@ -39,8 +39,8 @@ export default function HomePage() {
         <h1 className="text-lg font-semibold md:text-2xl">Feed</h1>
         <div className="flex gap-x-3">
           <AddPost />
-          // check if user is logged in
-          {society && <CreateEvent />}
+          {/* // check if user is logged in */}
+          {/* {society && <CreateEvent />} */}
         </div>
       </div>
       <div

@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button"
@@ -32,7 +32,9 @@ import { useState } from "react";
 import { FormSuccess } from "@/components/form-success";
 
 const formSchema = z.object({
-    content: z.string(),
+    title: z.string(),
+    details: z.string(),
+    price: z.string(),
     image: z.string(),
 });
 
@@ -44,7 +46,9 @@ export function AddPost() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            content: "",
+            title: "",
+            details: "",
+            price: "",
             image: "",
         },
     });
@@ -52,7 +56,7 @@ export function AddPost() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
         try {
-            const resp = await axios.post("api/post/addpost", values);
+            const resp = await axios.post("api/book/addbook", values);
             setError(resp.data.error);
             setSuccess(resp.data.success);
             location.reload();
@@ -73,7 +77,7 @@ export function AddPost() {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="default" className="gap-x-1"><PlusCircleIcon size={18} />  New Post</Button>
+                <Button variant="default" className="gap-x-1"><PlusCircleIcon size={18} />  Add New Book</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -87,15 +91,47 @@ export function AddPost() {
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                             <FormField
                                 control={form.control}
-                                name="content"
+                                name="title"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Content:</FormLabel>
+                                        <FormLabel>Title:</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="e.g The Alchemist"
+                                                className="col-span-3"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="details"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Details:</FormLabel>
                                         <FormControl>
                                             <Textarea
-                                                id="username"
-                                                placeholder="Enter content here"
-                                                defaultValue=""
+                                                placeholder="e.g The Alchemist is a novel"
+                                                className="col-span-3"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="price"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Price:</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="e.g. 1000"
                                                 className="col-span-3"
                                                 {...field}
                                             />

@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        const { content, image } = await req.json();
+        const { title, details, price, image } = await req.json();
 
         const session = await auth();
 
@@ -23,16 +23,18 @@ export async function POST(req: Request) {
 
 
         // create the post
-        const createdPost = await prisma.post.create({
+        const createdBok = await prisma.book.create({
             data: {
-                body: content,
+                title,
+                details,
+                price,
                 image,
                 userId: currentUser?.id!,
             },
         })
 
         return NextResponse.json(
-            { success: "Post Created!", post: createdPost },
+            { success: "Book Created!", book: createdBok },
             { status: 200 }
         );
     } catch (e) {
