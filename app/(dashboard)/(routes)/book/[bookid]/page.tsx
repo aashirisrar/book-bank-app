@@ -10,15 +10,17 @@ import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function UserProfilePage() {
   const [book, setBook] = useState({});
+  const [user, setUser] = useState({});
   const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchUserPosts() {
     try {
       const response = await axios.post("/api/book/getbook", {
-        book: params.book,
+        bookId: params.bookid,
       });
       setBook(response.data.book);
+      setUser(response.data.user);
     } catch (error) {
       console.error("Error fetching book", error);
     }
@@ -41,7 +43,7 @@ export default function UserProfilePage() {
         <h1 className="text-lg font-semibold md:text-2xl">Book Details</h1>
       </div>
       <div>
-        <UserProfileComponent user={currUser} />
+        <UserProfileComponent user={user} book={book} />
       </div>
       <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"
