@@ -9,27 +9,18 @@ import UserProfileComponent from "@/components/user-profile";
 import { SkeletonCard } from "@/components/skeleton-card";
 
 export default function UserProfilePage() {
-  const [posts, setPosts] = useState([]);
-  const [currUser, setCurruser] = useState({});
+  const [book, setBook] = useState({});
   const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchUserPosts() {
     try {
-      const response = await axios.post("/api/post/getuserposts", {
-        username: params.username,
+      const response = await axios.post("/api/book/getbook", {
+        book: params.book,
       });
-      setPosts(response.data.posts);
-
-      // set dateofbirth to a readable format
-      const date = new Date(response.data.user.dateOfBirth);
-      const formattedDate =
-        date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-      response.data.user.dateOfBirth = formattedDate;
-
-      setCurruser(response.data.user);
+      setBook(response.data.book);
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error("Error fetching book", error);
     }
   }
 
@@ -47,8 +38,7 @@ export default function UserProfilePage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold md:text-2xl">Posts</h1>
-        <AddPost />
+        <h1 className="text-lg font-semibold md:text-2xl">Book Details</h1>
       </div>
       <div>
         <UserProfileComponent user={currUser} />
@@ -68,9 +58,9 @@ export default function UserProfilePage() {
             </div> */}
 
         <div className="grid grid-cols-3 mt-[10px]">
-          {posts.map((post: any) => (
+          {/* {posts.map((post: any) => (
             <PostComponent key={post.postId} {...post} />
-          ))}
+          ))} */}
         </div>
       </div>
     </>

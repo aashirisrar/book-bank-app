@@ -8,10 +8,8 @@ import LikeComponent from "@/components/like";
 import Link from "next/link";
 
 export default function PostComponent({
-  postId,
-  createdAt,
-  user,
   image,
+  bookId,
   title,
   details,
   price
@@ -49,34 +47,17 @@ export default function PostComponent({
   return (
     <Card className="space-y-2 px-6 mb-4 w-[80%] mx-auto">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <div className="flex items-center gap-4">
-          <Avatar className="hidden h-9 w-9 sm:flex">
-            <AvatarImage src={user.profilePicture} alt={postId} />
-            <AvatarFallback>{user.firstName}</AvatarFallback>
-          </Avatar>
-          <div className="grid gap-1">
-            <Link href={"/user/" + user.name}>
-              <p className="text-sm font-medium leading-none hover:underline">
-                {user.name}
-              </p>
-            </Link>
-            <p className="text-sm text-muted-foreground">
-              {calculateTimeDifference(createdAt)}
-            </p>
-          </div>
-        </div>
-        <LucideMenu className="h-4 w-4 text-muted-foreground" />
+        <p className="font-bold text-muted-foreground">{title}</p>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-col items-start gap-4">
-          <p className="font-bold text-muted-foreground">{title}</p>
           <div className="w-full">
             <Image
               width={400}
               className="w-full"
               style={{ objectFit: "contain" }}
               height={400}
-              alt={postId}
+              alt={bookId}
               src={image}
             />
           </div>
@@ -84,6 +65,11 @@ export default function PostComponent({
           <p className="text-sm text-muted-foreground">Rs. {price}</p>
         </div>
         <div className="flex gap-2">
+          <div className="w-full">
+            <Link href={"/book/" + bookId}>
+              <Button className="w-full">View Book</Button>
+            </Link>
+          </div>
         </div>
       </CardContent>
     </Card>
