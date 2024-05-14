@@ -8,13 +8,13 @@ import LikeComponent from "@/components/like";
 import Link from "next/link";
 
 export default function PostComponent({
-  body,
-  image,
-  likeCount,
-  commentCount,
   postId,
   createdAt,
-  user
+  user,
+  image,
+  title,
+  details,
+  price
 }: any) {
   function calculateTimeDifference(
     timeCreatedAt: Date | string | number
@@ -69,7 +69,7 @@ export default function PostComponent({
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-col items-start gap-4">
-          <p className="text-sm text-muted-foreground">{body}</p>
+          <p className="font-bold text-muted-foreground">{title}</p>
           <div className="w-full">
             <Image
               width={400}
@@ -80,15 +80,10 @@ export default function PostComponent({
               src={image}
             />
           </div>
+          <p className="text-sm text-muted-foreground">{details}</p>
+          <p className="text-sm text-muted-foreground">Rs. {price}</p>
         </div>
         <div className="flex gap-2">
-          {/* add like count here */}
-          <LikeComponent postId={postId} likeCount={likeCount} />
-          {/* add comment count here */}
-          <Button variant="outline">
-            <MessageCircle size={16} className="mr-1" />
-            {commentCount}
-          </Button>
         </div>
       </CardContent>
     </Card>

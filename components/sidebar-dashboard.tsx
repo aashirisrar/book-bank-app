@@ -5,10 +5,7 @@ import {
     Bell,
     Book,
     Home,
-    Package,
     PanelTop,
-    Sparkles,
-    Users,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -23,9 +20,9 @@ export const routes = [
         href: "/home",
     },
     {
-        label: "Your Profile",
+        label: "Your Books",
         icon: PanelTop,
-        href: "/profile",
+        href: "/user/",
     },
 ];
 
