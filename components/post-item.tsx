@@ -62,7 +62,7 @@ export default function PostComponent({
             />
           </div>
           <p className="text-sm text-muted-foreground">{details}</p>
-          <p className="text-sm text-muted-foreground">Rs. {price}</p>
+          <p className="text-sm text-primary">Rs. {price}</p>
         </div>
         <div className="flex gap-2">
           <div className="w-full">

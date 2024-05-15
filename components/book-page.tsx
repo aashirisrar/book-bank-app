@@ -20,7 +20,7 @@ const BookPage = ({ book, user }: any) => {
                                 <div className="text-sm text-muted-foreground">
                                     {book.details}
                                 </div>
-                                <div className="text-sm text-muted-foreground">
+                                <div className="text-sm text-primary">
                                     Rs {book.price}
                                 </div>
                             </div>

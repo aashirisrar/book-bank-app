@@ -18,7 +18,7 @@ const BookComponent = ({ bookId, image, title, details, price }: any) => {
                                 <div className="text-sm text-muted-foreground">
                                     {details}
                                 </div>
-                                <div className="text-sm text-muted-foreground">
+                                <div className="text-sm text-primary">
                                     Rs {price}
                                 </div>
                             </div>
