@@ -26,18 +26,18 @@ const BookPage = ({ book, user }: any) => {
                             </div>
                         </div>
                     </div>
-                    <div className="max-md:flex max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-4">
+                    <div className="flex flex-col max-md:justify-center items-center gap-4">
                         <div className="font-semibold text-center">Seller Details</div>
                         <Link href={"/user/" + user.name}>
-                            <div className="gap-2 inline-flex hover:bg-primary-foreground p-2 rounded-lg">
+                            <div className="gap-2 inline-flex hover:bg-primary-foreground p-4 rounded-lg">
                                 <Avatar className="h-20 w-20 max-sm:w-10 max-sm:h-10">
                                     <AvatarImage src={user.profilePicture} alt="Avatar" />
                                     <AvatarFallback>OM</AvatarFallback>
                                 </Avatar>
-                                <CardTitle className="mt-[20px] ml-[10px] max-sm:mt-0 max-sm:text-base" >
+                                <CardTitle className="mt-[10px] ml-[10px] max-sm:mt-0 max-sm:text-base" >
                                     <div>{user.firstName}</div>
                                     <div className="text-sm font-light">@ {user.name}</div>
-                                    <p>{user.phone}</p>
+                                    <div className="text-sm font-light">{user.phone}</div>
                                 </CardTitle>
                             </div>
                         </Link>

@@ -22,7 +22,7 @@ const UserProfileComponent = ({ user }: any) => {
           <div className="mx-[auto] font-medium">
             {user.firstName + " " + user.lastName}
           </div>
-          <div className="mx-[auto] font-medium">{user.phone}</div>
+          <div className="mx-[auto] font-light text-sm">{user.phone}</div>
         </div>
       </CardContent>
     </Card>

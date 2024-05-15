@@ -43,11 +43,11 @@ export default function UserProfilePage() {
       <div>
         <BookPage user={user} book={book} />
       </div>
-      <div
+      {/* <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"
         x-chunk="dashboard-02-chunk-1"
       >
-        {/* <div className="flex flex-col items-center gap-1 text-center">
+        <div className="flex flex-col items-center gap-1 text-center">
               <h3 className="text-2xl font-bold tracking-tight">
                 You have no products
               </h3>
@@ -55,14 +55,8 @@ export default function UserProfilePage() {
                 You can start selling as soon as you add a product.
               </p>
               <Button className="mt-4">Add Product</Button>
-            </div> */}
-
-        <div className="grid grid-cols-3 mt-[10px]">
-          {/* {posts.map((post: any) => (
-            <PostComponent key={post.postId} {...post} />
-          ))} */}
-        </div>
-      </div>
+            </div>
+      </div> */}
     </>
   );
 }
