@@ -32,8 +32,7 @@ const formSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   bio: z.string(),
-  dob: z.string(),
-  gender: z.string(),
+  phone: z.string()
 });
 
 export function SignUpForm() {
@@ -51,8 +50,7 @@ export function SignUpForm() {
       firstName: "",
       lastName: "",
       bio: "",
-      gender: "",
-      dob: "1998-01-01",
+      phone: ""
     },
   });
 
@@ -154,54 +152,6 @@ export function SignUpForm() {
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-2 gap-4">
-            <div className="grid gap-2">
-              <FormField
-                control={form.control}
-                name="dob"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Date of Birth:</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isPending}
-                        type="date"
-                        placeholder="e.g 123456"
-                        {...field}
-                        required
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="grid gap-2">
-              <FormField
-                control={form.control}
-                name="gender"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Gender</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={genderplaceholder} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Male">Male</SelectItem>
-                        <SelectItem value="Female">Female</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
           <div className="grid gap-2">
             <FormField
               control={form.control}
@@ -214,6 +164,27 @@ export function SignUpForm() {
                       disabled={isPending}
                       type="text"
                       placeholder="e.g lXXXXXX@lhr.nu.edu.pk"
+                      {...field}
+                      required
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="grid gap-2">
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number:</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isPending}
+                      type="text"
+                      placeholder="e.g +92312345678"
                       {...field}
                       required
                     />
@@ -261,6 +232,6 @@ export function SignUpForm() {
           </div>
         </form>
       </Form>
-    </div>
+    </div >
   );
 }

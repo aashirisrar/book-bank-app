@@ -7,7 +7,7 @@ import { sendEmail } from "@/utils/sendEmail";
 
 export async function POST(req: Request) {
     try {
-        const { email, userName, password, firstName, lastName, bio } = await req.json();
+        const { email, userName, password, firstName, lastName, bio, phone } = await req.json();
 
         const hashedPassword = await bcryptjs.hash(password, 10);
 
@@ -20,6 +20,7 @@ export async function POST(req: Request) {
                 lastName,
                 bio,
                 password: hashedPassword
+                phone
             }
         })
 

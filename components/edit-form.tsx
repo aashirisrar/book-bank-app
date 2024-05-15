@@ -18,13 +18,6 @@ import axios from "axios";
 import { useEffect, useState, useTransition } from "react";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
 import UploadBtn from "./upload-button";
 import { SkeletonCard } from "./skeleton-card";
 
@@ -33,16 +26,14 @@ const formSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   bio: z.string(),
-  dob: z.string(),
-  gender: z.string(),
   image: z.string(),
+  phone: z.string(),
 });
 
 export function EditForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [genderplaceholder, setGenderplaceholder] = useState("Select a gender");
   const [isLoading, setIsLoading] = useState(true);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,9 +43,8 @@ export function EditForm() {
       firstName: "",
       lastName: "",
       bio: "",
-      gender: "",
-      dob: "1998-01-01",
       image: "",
+      phone: ""
     },
   });
 
@@ -71,20 +61,15 @@ export function EditForm() {
       const response = await axios.post("/api/profile/getprofile");
       const userData = response.data.user;
 
-      const dateOfBir = userData.dateOfBirth.split("T")[0];
-
       // Set default values for form fields using fetched user data
       form.setValue("userName", userData.name || "");
       form.setValue("firstName", userData.firstName || "");
       form.setValue("lastName", userData.lastName || "");
       form.setValue("bio", userData.bio || "");
-      form.setValue("dob", dateOfBir || "1998-01-01");
-      form.setValue("gender", userData.gender || "");
       form.setValue("image", userData.profilePicture || "");
-      // Set placeholder for gender
-      setGenderplaceholder(userData.gender || "Select a gender");
+      form.setValue("phone", userData.phone || "");
 
-      // form.setValue('password', '');
+
     } catch (error) {
       console.error("Error fetching user profile:", error);
     }
@@ -201,55 +186,25 @@ export function EditForm() {
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <FormField
-                  control={form.control}
-                  name="dob"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Date of Birth:</FormLabel>
-                      <FormControl>
-                        <Input
-                          disabled={isPending}
-                          type="date"
-                          placeholder="e.g 123456"
-                          required
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="grid gap-2">
-                <FormField
-                  control={form.control}
-                  name="gender"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Gender</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder={genderplaceholder} />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Male">Male</SelectItem>
-                          <SelectItem value="Female">Female</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number:</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isPending}
+                      type="text"
+                      placeholder="e.g +92312345678"
+                      required
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="image"
@@ -277,6 +232,6 @@ export function EditForm() {
           </div>
         </form>
       </Form>
-    </div>
+    </div >
   );
 }

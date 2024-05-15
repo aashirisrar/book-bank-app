@@ -14,8 +14,14 @@ export async function POST(req: Request) {
             );
         }
 
+        const user = await prisma.user.findUnique({
+            where: {
+                id: session?.user?.id!,
+            }
+        });
+
         return NextResponse.json(
-            { success: "Profile Found!", isLoggedin: true },
+            { success: "Profile Found!", isLoggedin: true, user: user },
             { status: 200 }
         );
     } catch (e) {

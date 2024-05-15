@@ -1,11 +1,10 @@
-import bcryptjs from "bcrypt";
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 
 export async function POST(req: Request) {
     try {
-        const { userName, firstName, lastName, bio, dob, gender, image } = await req.json();
+        const { userName, firstName, lastName, bio, image, phone } = await req.json();
 
         const session = await auth();
 
@@ -26,9 +25,8 @@ export async function POST(req: Request) {
                 firstName,
                 lastName,
                 bio,
-                gender,
-                dateOfBirth: new Date(dob),
                 profilePicture: image,
+                phone
             }
         })
 
