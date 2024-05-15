@@ -16,12 +16,18 @@ export async function POST(req: Request) {
 
         const user = await prisma.user.findUnique({
             where: {
-                id: session?.user?.email!,
+                email: session?.user?.email!,
+            }
+        });
+
+        const books = await prisma.book.findMany({
+            where: {
+                userId: user?.id
             }
         });
 
         return NextResponse.json(
-            { success: "Profile Found!", isLoggedin: true, user: user },
+            { success: "Profile Found!", isLoggedin: true, user: user, books: books },
             { status: 200 }
         );
     } catch (e) {

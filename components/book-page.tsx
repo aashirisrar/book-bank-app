@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 
 const BookPage = ({ book, user }: any) => {
     return (
@@ -27,17 +28,19 @@ const BookPage = ({ book, user }: any) => {
                     </div>
                     <div className="max-md:flex max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-4">
                         <div className="font-semibold text-center">Seller Details</div>
-                        <div className="gap-2 flex">
-                            <Avatar className="h-20 w-20 max-sm:w-10 max-sm:h-10">
-                                <AvatarImage src={user.profilePicture} alt="Avatar" />
-                                <AvatarFallback>OM</AvatarFallback>
-                            </Avatar>
-                            <CardTitle className="mt-[20px] ml-[10px] max-sm:mt-0 max-sm:text-base" >
-                                <div>{user.firstName}</div>
-                                <div className="text-sm font-light">@ {user.name}</div>
-                                <p>{user.phone}</p>
-                            </CardTitle>
-                        </div>
+                        <Link href={"/user/" + user.name}>
+                            <div className="gap-2 inline-flex hover:bg-primary-foreground p-2 rounded-lg">
+                                <Avatar className="h-20 w-20 max-sm:w-10 max-sm:h-10">
+                                    <AvatarImage src={user.profilePicture} alt="Avatar" />
+                                    <AvatarFallback>OM</AvatarFallback>
+                                </Avatar>
+                                <CardTitle className="mt-[20px] ml-[10px] max-sm:mt-0 max-sm:text-base" >
+                                    <div>{user.firstName}</div>
+                                    <div className="text-sm font-light">@ {user.name}</div>
+                                    <p>{user.phone}</p>
+                                </CardTitle>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </CardContent>

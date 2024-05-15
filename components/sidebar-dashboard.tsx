@@ -22,7 +22,7 @@ export const routes = [
     {
         label: "Your Books",
         icon: PanelTop,
-        href: "/user/",
+        href: "/user",
     },
 ];
 
