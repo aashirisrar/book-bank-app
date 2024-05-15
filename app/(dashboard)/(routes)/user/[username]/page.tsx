@@ -3,22 +3,23 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import UserProfileComponent from "@/components/user-profile";
 import { SkeletonCard } from "@/components/skeleton-card";
-import BookPage from "@/components/book-page";
+import BookComponent from "@/components/book-component";
 
 export default function UserProfilePage() {
-  const [book, setBook] = useState({});
-  const [user, setUser] = useState({});
   const params = useParams();
+  const [user, setUser] = useState({});
+  const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  async function fetchUserPosts() {
+  async function fetchUser() {
     try {
-      const response = await axios.post("/api/book/getbook", {
-        bookId: params.bookid,
+      const response = await axios.post("/api/profile/getuserprofile", {
+        name: params.username,
       });
-      setBook(response.data.book);
       setUser(response.data.user);
+      setBooks(response.data.books);
     } catch (error) {
       console.error("Error fetching book", error);
     }
@@ -28,7 +29,7 @@ export default function UserProfilePage() {
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-    fetchUserPosts();
+    fetchUser();
   }, []);
 
   if (isLoading) {
@@ -38,10 +39,10 @@ export default function UserProfilePage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold md:text-2xl">Book Details</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">User Details</h1>
       </div>
       <div>
-        <BookPage user={user} book={book} />
+        <UserProfileComponent user={user} />
       </div>
       <div
         className="flex justify-between gap-4 rounded-lg shadow-sm"
@@ -57,10 +58,10 @@ export default function UserProfilePage() {
               <Button className="mt-4">Add Product</Button>
             </div> */}
 
-        <div className="grid grid-cols-3 mt-[10px]">
-          {/* {posts.map((post: any) => (
-            <PostComponent key={post.postId} {...post} />
-          ))} */}
+        <div className="grid max-sm:mx-auto max-sm:grid-cols-1 max-md:grid-cols-2 max-lg:grid-cols-2 max-xl:grid-cols-3 mt-[5px]">
+          {books.map((book: any) => (
+            <BookComponent key={book.bookId} {...book} />
+          ))}
         </div>
       </div>
     </>

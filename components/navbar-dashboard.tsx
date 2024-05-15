@@ -32,17 +32,17 @@ const NavbarDashboard = () => {
     const pathName = usePathname();
     const [profilepicture, setProfilePicture] = useState();
 
-    useEffect(() => {
-        async function fetchUserProfile() {
-            try {
-                const response = await axios.post('/api/profile/getprofile');
-                setProfilePicture(response.data.user.profilePicture);
+    async function fetchUserProfile() {
+        try {
+            const response = await axios.post('/api/profile/getprofile');
+            setProfilePicture(response.data.user.profilePicture);
 
-            } catch (error) {
-                console.error('Error fetching user profile:', error);
-            }
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
         }
+    }
 
+    useEffect(() => {
         fetchUserProfile();
     }, []);
 
